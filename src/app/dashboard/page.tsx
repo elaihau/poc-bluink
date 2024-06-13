@@ -1,9 +1,12 @@
+import { Suspense } from 'react';
 import styles from "../page.module.css";
 import Image from "next/image";
 import User from "./user";
 
 export default async function Page() {
   // 1. retrive code from URL
+
+
   // 2. make token request
   const info = {
     name: 'Liang'
@@ -21,9 +24,11 @@ export default async function Page() {
           priority
         />
       </div>
-      <div className={styles.profile}>
-        <User {...info}></User>        
-      </div>
+      <Suspense>
+        <div className={styles.profile}>
+          <User {...info}></User>
+        </div>
+      </Suspense>
     </main>
   );
 }
