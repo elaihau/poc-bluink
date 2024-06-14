@@ -84,6 +84,9 @@
 .profile {
   padding: 0;
 }
+.decoded {
+  line-break: anywhere;
+}
 
 .center {
   display: flex;

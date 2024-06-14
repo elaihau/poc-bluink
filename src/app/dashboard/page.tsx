@@ -1,17 +1,9 @@
 import { Suspense } from 'react';
-import styles from "../page.module.css";
+import styles from "@/app/page.module.css";
 import Image from "next/image";
 import User from "./user";
 
-export default async function Page() {
-  // 1. retrive code from URL
-
-
-  // 2. make token request
-  const info = {
-    name: 'Liang'
-  };
-
+export default function Page() {
   return (
     <main className={styles.dashboard}>
       <div className={styles.center}>
@@ -26,7 +18,7 @@ export default async function Page() {
       </div>
       <Suspense>
         <div className={styles.profile}>
-          <User {...info}></User>
+          <User></User>
         </div>
       </Suspense>
     </main>
