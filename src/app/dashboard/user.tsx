@@ -18,19 +18,30 @@ export default async function User() {
   const url = 'https://demoeid.bluink.ca/oidc/token';
   let decoded = getItem('decodedToken');
   if (!decoded) {
+    const grantType = 'grant_type=authorization_code';
+    const clientId = 'client_id=4b715a871eb524523f90';
+    const secret = 'client_secret=884f46109efd11b010dc55905f6503ca';
+    const redirect = 'redirect_uri=https%3A%2F%2Fpoc-bluink.vercel.app%2Fdashboard';
     const res = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({
-        code: codeParam,    
-        grant_type: "authorization_code",
-        client_id: "4b715a871eb524523f90",
-        client_secret: "884f46109efd11b010dc55905f6503ca",
-        redirect_uri: "https%3A%2F%2Fpoc-bluink.vercel.app%2Fdashboard"
-      }),
-    });
+      body: `code=${codeParam}&${grantType}&${clientId}&${secret}&${redirect}`,
+    })
+    // const res = await fetch(url, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     code: codeParam,    
+    //     grant_type: "authorization_code",
+    //     client_id: "4b715a871eb524523f90",
+    //     client_secret: "884f46109efd11b010dc55905f6503ca",
+    //     redirect_uri: "https%3A%2F%2Fpoc-bluink.vercel.app%2Fdashboard"
+    //   }),
+    // });
     if (res.status === 200) {
       const jsonRes = await res.json();
       const idToken = jsonRes.id_token;
